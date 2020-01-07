@@ -65,3 +65,8 @@ class MicropostsController extends Controller
         return view('users.followers', $data);
     }
 }
+
+
+
+
+

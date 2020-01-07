@@ -4,3 +4,5 @@
     <li class="nav-item"><a href="{{ route('users.followers', ['id' => $user->id]) }}" class="nav-link {{ Request::is('users/*/followers') ? 'active' : '' }}">Followers <span class="badge badge-secondary">{{ $count_followers }}</span></a></li>
     <li class="nav-item"><a href="{{ route('users.favoriting', ['id' => $user->id]) }}" class="nav-link {{ Request::is('users/*/favoriting') ? 'active' : '' }}">Favoriting <span class="badge badge-secondary">{{ $count_favoriting }}</span></a></li>
 </ul>
+
+
