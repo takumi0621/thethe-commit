@@ -1,15 +1,6 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
 
 
 Route::get('signup', 'Auth\RegisterController@showRegistrationForm')->name('signup.get');
@@ -23,11 +14,30 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 
 
 
-Route::get('/', 'MicropostsController@index');
+Route::get('/', 'JobsController@index');
+
+
+
+
+
 
 Route::group(['middleware' => 'auth'], function () {
+    
+    
+    
+    
+     
+       Route::get('separation', 'SeparationController@separation')->name('separation.followers');
+  
+       Route::get('move', 'UsersController@move')->name('move.get');
+      
+    
+    
+    
+    
+    
     Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
-    Route::resource('microposts', 'MicropostsController', ['only' => ['store', 'destroy']]);
+    Route::resource('jobs', 'JobsController', ['only' => ['store', 'destroy', 'edit']]);
 
 
 
@@ -43,12 +53,18 @@ Route::group(['middleware' => 'auth'], function () {
     
     
     
+    
+    
+    
     Route::group(['prefix' => 'favorites/{micropost_id}'], function () {
         Route::post('favorites', 'FavoritesController@store')->name('user.favorites');
         Route::delete('unfavorites', 'FavoritesController@destroy')->name('user.unfavorites');
         Route::get('favoriting', 'UsersController@favoriting')->name('users.favoriting');
         Route::get('favoreted', 'MicropostsController@favorited')->name('user.favorited');
     });
+    
+    Route::get('/profile', 'ProfileController@index');
+    Route::post('/profile', 'ProfileController@store');
 });
     
     

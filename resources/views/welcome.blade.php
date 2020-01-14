@@ -4,46 +4,27 @@
    
     @if (Auth::check())
      
-                    
-                    
-                    
-                    
-                    
-        
-        
-        
-        <div class="welcome-three">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6">
-                      <div class="welcome-country">
-                        <h1>ヨーロッパ</h1>
-                        <img src="https://cdn.omni-links.com/tourimages/thumb/b7f0aa81a31e70acbe2f25b877feeb99_thumb_1680x1280.jpg" class="welcome-three-one">
-                      </div>    
-                      <div class="welcome-country">
-                         <h1>オセアニア</h1>
-                         <img src="https://www.img-ikyu.com/contents/global/images/area/pf.jpg?interpolation=progressive-bilinear&fit=around%7C1924:*&crop=w:1000;*,*" class="welcome-three-one">
-                      </div>    
-                      <div class="welcome-country">
-                         <h1>アメリカ</h1>    
-                         <img src="https://www.kaplaninternational.com/jp/blog/files/inline-images/JP_Blog_places_to_visits_in_US.jpg" class="welcome-three-one">
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="welcome-country">
-                            <h1>東アジア</h1>
-                            <img src="https://dr91yhkmywk3x.cloudfront.net/blog/wp-content/uploads/2018/11/01142215/bridge-3616616_1920.jpg" class="welcome-three-one">
-                        </div>
-                        <div class="welcome-country">
-                            <h1>アフリカ</h1>
-                            <img src="https://www.dososhin.com/img/feature/00047/02.jpg" class="welcome-three-one">
-                       </div> 
-                    </div>
-                </div>
-            </div>
-            
+  　　  
+  　　　　@include('users.navtabs', ['user' => $user])
+        <div class="container">
+            <div class="row">
+                
+               <div class="col-sm-6">
+                   {!! link_to_route('users.index', '依頼者です', [], ['class' => 'btn btn-lg btn-primary']) !!}
+               </div>
+               <div class="col-sm-6">
+                   {!! link_to_route('users.index', '受注者です', [], ['class' => 'btn btn-lg btn-primary']) !!}
+               </div>
+           </div>
         </div>
-    
+
+
+
+                    
+                
+        
+        
+       
        
     @else
         <div class="welcome-one">

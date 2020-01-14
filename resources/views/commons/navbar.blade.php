@@ -11,6 +11,7 @@
             <ul class="navbar-nav">
                 @if (Auth::check())
                     <li class="nav-item nav-hello-one">{{ Auth::user()->name }}さんこんにちは</li>
+                    
                     <li class="nav-item">{!! link_to_route('users.index', '仕事を探す', [], ['class' => 'nav-link']) !!}</li>
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle navbar-white" data-toggle="dropdown">{{ Auth::user()->name }}</a>

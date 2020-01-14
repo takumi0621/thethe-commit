@@ -15,6 +15,12 @@ class UsersController extends Controller
         return view('users.index', [
             'users' => $users,
         ]);
+        
+        
+        
+        
+        
+        
     }
 
 
@@ -23,17 +29,36 @@ class UsersController extends Controller
 public function show($id)
     {
         $user = User::find($id);
-        $microposts = $user->feed_microposts()->orderBy('created_at', 'desc')->paginate(10);
+        $jobs = $user->jobs()->orderBy('created_at', 'desc')->paginate(10);
+        $talks = $user->talked()->orderBy('created_at', 'desc')->paginate(10);
+        $workers = $user->working()->orderBy('created_at', 'desc')->paginate(10);
+
+
+
 
         $data = [
             'user' => $user,
-            'microposts' => $microposts,
+            'jobs' => $jobs,
+            'talks' => $talks,
+            'talks' =>$workers ,
         ];
+        
+        
+        
+        
 
         $data += $this->counts($user);
 
         return view('users.show', $data);
     }
+    
+    
+    
+    
+    
+    
+    
+    
     
     public function followings($id)
     {
@@ -79,6 +104,37 @@ public function show($id)
 
         return view('users.favoriting', $data);
     }
+    
+    
+    
+    
+    
+    
+    public function move()
+    {
+       
+        
+        
+        
+        
+        return view('users.posting');
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
 }
