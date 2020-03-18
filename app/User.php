@@ -42,20 +42,167 @@ class User extends Authenticatable
         return $this->hasMany(Job::class);
     }
     
-  
     
-     public function talked()
+     public function feed_jobs()
+    {
+        $jobs_ids = Job::orderBy('id', 'desc')->paginate(10); 
+        $favorites_ids[] = $this->id;
+        return Micropost::whereIn('user_id', $follow_user_ids);
+       
+        $jobs = Job::orderBy('id', 'desc')->paginate(10); 
+        return view('users.index', [
+            'users' => $users,
+        ]);
+    }
+    
+    
+    public function talks() {
+        return $this->hasMany(Talk::class);
+    }
+    
+    
+    
+     public function talking()
+    {
+        return $this->belongsToMany(Job::class, 'talks', 'user_id', 'job_id')->withTimestamps();
+    } 
+ /*   
+ 
+    public function talked()
     {
         return $this->belongsToMany(Talk::class, 'talks', 'talk', 'user_id')->withTimestamps();
-    }
-    
-    
-    
-    
-     public function working()
+    } 
+ */   
+     public function getTalk()
     {
-        return $this->belongsToMany(Worker::class, 'workers', 'user_id', 'worker')->withTimestamps();
+         $data = [];
+        if (\Auth::check()) {
+            
+            $talk1 = $this->talking()->orderBy('created_at', 'desc')->paginate(10);
+            //$talk2 = $this->talked()->orderBy('created_at', 'desc')->paginate(10);
+            
+            $data = [
+                
+                'talk1' => $talk1,
+                'talk2' => $talk2,
+            
+            ];
+        }
+        return $data;
     }
+    
+    
+    
+  
+        
+
+       
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+     
+    
+    
+    
+    
+    
+     public function worked()
+    {
+        return $this->belongsToMany(Worker::class, 'workers', 'job_id', 'user_id')->withTimestamps();
+    } 
+    
+    
+    
+    public function is_working($userId) {
+        return $this->working()->where('job_id', $userId)->exists();
+    } 
+    
+    
+     public function is_getting_worked($job_id) {
+        return $this->worked()->where('user_id', $userId)->exists();
+    } 
+    
+    
+ 
+    
+    
+    
+    
+    
+    
+    public function give_work($userId)
+    {
+        $exist = $userId->status　== 0;
+        
+     
+        $its_me = $this->id == $userId;
+    
+        if ($exist || $its_me) {
+           
+            return false;
+        } else {
+            $userId->status += 1; 
+            $this->attach($userId);
+            return true;
+        }
+    }
+    
+    public function checkStatus() {
+     
+        return $this->belongsTo(Worker::class, 'workers', 'user_id', 'job_id')->withTimestamps();
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    public function block_work($useId) {
+        $exist = $this->is_working($userId);
+       
+        $its_me = $this->id == $userId;
+    
+        if ($exist && !$its_me) {
+            
+            $this->working()->detach($userId);
+            return true;
+        } else {
+        
+            return false;
+        }
+    }
+    
+    
+  
+    
+  
+  
+  
+  
+  
+  
+    
+
+
+
+
+
+
+
+    
+    
+    
+    
     
    
    
@@ -81,33 +228,33 @@ class User extends Authenticatable
     
     
     public function favoriting() {
-        return $this->belongsToMany(Micropost::class, 'favorites', 'user_id', 'micropost_id')->withTimestamps();
+        return $this->belongsToMany(Job::class, 'favorites', 'user_id', 'favorite_id')->withTimestamps();
     }
     
      public function favorited()
     {
-        return $this->belongsToMany(Micropost::class, 'favorites', 'micropost_id', 'user_id')->withTimestamps();
+        return $this->belongsToMany(Job::class, 'favorites', 'micropost_id', 'user_id')->withTimestamps();
     }
     
-    public function favorites($micropost_id) {
-        $exist = $this->is_favoriting($micropost_id);
+    public function favorites($favorite_id) {
+        $exist = $this->is_favoriting($favorite_id);
         
         
         if ($exist) {
             return false;
         } else {
-            $this->favoriting()->attach($micropost_id);
+            $this->favoriting()->attach($favorite_id);
             return true;
         }
     }
     
     
-    public function unfavorites($micropost_id) {
-        $exist = $this->is_favoriting($micropost_id);
+    public function unfavorites($favorite_id) {
+        $exist = $this->is_favoriting($favorite_id);
         
         
         if($exist) {
-            $this->favoriting()->detach($micropost_id);
+            $this->favoriting()->detach($favorite_id);
             return true;
         } else {
             return false;
@@ -121,7 +268,7 @@ class User extends Authenticatable
     
      public function is_favoriting($userId)
     {
-        return $this->favoriting()->where('micropost_id', $userId)->exists();
+        return $this->favoriting()->where('favorite_id', $userId)->exists();
     }
     
     public function feed_favorites()
@@ -131,5 +278,15 @@ class User extends Authenticatable
         return Micropost::whereIn('user_id', $follow_user_ids);
     }
     
+    
+     public function doingWork()
+    {
+        return $this->belongsToMany(Job::class, 'workers', 'user_id', 'job_id')->withTimestamps();
+    }
+    
+    public function worker()
+    {
+       return $this->belongsToMany(User::class, 'workers','user_id', 'job_id');
+    }
 }
 

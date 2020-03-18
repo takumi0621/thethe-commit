@@ -54,3 +54,77 @@
             
         </div>
     
+    
+    
+    
+    
+    
+     $data = [];
+        if (\Auth::check()) {
+            $user = \Auth::user();
+            $jobs = $user->jobs()->orderBy('created_at', 'desc')->paginate(10);
+            $talks = $user->talking()->orderBy('created_at', 'desc')->paginate(10);
+            $workers = $user->working()->orderBy('created_at', 'desc')->paginate(10);
+
+            
+
+            $data = [
+                'user' => $user,
+                'jobs' => $jobs,
+                'talks' => $talks,
+                'workers' =>$workers ,
+            ];
+        }
+        
+        
+        
+        
+        public function checkTalk($jobId) {
+        $exist = $this->is_talking($jobId);
+        
+        if ($exist) {
+            return false;
+        } else {
+            $this->user()->talks()->taskStatus->attach("1");
+            return true;
+        }
+
+    }
+    
+    
+    
+    
+    public function endtalk() {
+        $pretalk = 0;
+        $pretalk = $this->talks()->latest()->first();
+        if ($pretalk == "") {
+           
+            return false;
+        } else {
+            return $pretalk->talk;
+        }
+    }
+    
+    
+    
+    
+    
+     <div class="col-sm-3">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <h3>タイトル</h3>
+                                        <h3>地域</h3>
+                                        <h3>問い合わせ</h3>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h3 class="underline">{{ $job->title }}</h3>
+                                        <h3 class="underline">{{ $job->district }}</h3>
+                                        <h3 class="underline">{{ $job->number }}</h3>
+                                    </div>
+                                </div>
+                            </div>s
+                            
+                            
+                            
+                            https://cdn.pixabay.com/photo/2020/02/14/16/04/mallorca-4848741__340.jpg
+                            https://cdn.pixabay.com/photo/2020/02/16/09/14/cherry-blossoms-4852942__340.jpg

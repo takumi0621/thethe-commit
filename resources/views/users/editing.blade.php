@@ -2,19 +2,34 @@
 
 @section('content')
 
-
-
-    <div class="post">
-        <h1>チャンスを提供する</h1>
     
-        {!! Form::open(['route' => 'jobs.']) !!}
-         　 <div class="form-group">
+    @include('commons.navbar') 
+    <div class="post">
+        <h1>編集する</h1>
+    
+        {!! Form::open(['route' => ['job.updating', $job->id]]) !!}
+            
+            <div class="form-group">
+                    {!! Form::label('district', '地域') !!}
+                    {{Form::select('district', [
+                       'america' => 'アメリカ',
+                       'asia' => 'アジア',
+                       'europe' => 'ヨーロッパ',
+                       'africa' => 'アフリカ',
+                       'oceania' => 'オセアニア'], old('district'), [
+                       'class' => 'form-control',
+                       'placeholder' => '選択してください',]
+                       
+                       
+                    )}}
+            </div>
+            <div class="form-group">
                     {!! Form::label('name', '名前') !!}
                     {!! Form::text('name', old('name'), ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
-                    {!! Form::label('district', '地域') !!}
-                    {!! Form::text('district', old('district'), ['class' => 'form-control']) !!}
+                    {!! Form::label('title', 'タイトル') !!}
+                    {!! Form::text('title', old('title'), ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
                     {!! Form::label('genre', 'ジャンル') !!}
@@ -42,10 +57,10 @@
             </div>
             <div class="form-group">
                     {!! Form::label('picture', '写真') !!}
-                    {!! Form::text('picture', old('picture'), ['class' => 'form-control']) !!}
+                    {!! Form::file('picture', ['class' => 'form-control']) !!}
             </div>
             
-            {!! Form::submit('Post', ['class' => 'btn btn-primary btn-block']) !!}
+            {!! Form::submit('保存', ['class' => 'btn btn-primary btn-block']) !!}
         {!! Form::close() !!}
     
     </div>

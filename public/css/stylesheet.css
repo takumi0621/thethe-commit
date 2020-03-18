@@ -22,21 +22,23 @@
 
 
 
-
-
-
-
 .navbar-one {
     height: 100px;
-    background-color: black;
+    background-color: #29a3e3;
     z-index: 10;
-    border: 2px solid black;
+    
 }
 
 .navbar-two {
     font-size: 40px;
     color: white;
 }
+
+.welcome-before-one {
+  height: 200px;
+  background-color: #29a3e3;
+}
+
 
 
 .welcome-one {
@@ -225,40 +227,131 @@
   height: 700px;
 }
 
+.poster-one {
+  height: auto;
+  background-color: white;
+  
+}
+
+.poster-one {
+  height: 250px;
+  background-color: rgba(70,140,203,.08);
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+  text-align: center;
+  color: black;
+}
+
+.poster-one-name {
+  color: black;
+}
+
+.poster-two-two {
+  background-color: white;
+  height: auto;
+   width: 100%;
+}
+.poster-two {
+  height: auto;
+  width: 95%;
+  
+  padding-top: 70px;
+  background-color: white;
+  color: black;
+  margin: 0 auto;
+  background-color: #F5F5F5;
+  margin-top: 30px;
+}
+.poster-two-width {
+  width: 80%;
+  margin: 0 auto;
+}
+.poster-three {
+  height: 300px;
+  border-bottom: 4px solid black;
+  
+}
+
+.poster-name-one {
+  border-bottom: 4px solid black;
+
+}
+
+.poster-four {
+  border-bottom: 4px solid blue;
+  height: 500px;
+  color: black;
+  background-color: white;
+}
+
+
+.poster-four-name {
+  border-bottom: 4px solid white;
+}
+
+.worker-one {
+    background-color: white;
+    height: 2000px;
+    padding-top: 40px;
+    border-top: 1px solid white;
+    color: white;
+}
+    
+
+
+.separate-one {
+  background-color: white;
+  
+}
+
+
+
+.talkroom-one {
+  border: 1px solid black; 
+}
+
+
+
+.poster-content {
+  border: 1px solid white;
+}
+
+
+.poster-image {
+  width: 300px;
+  height: 300px;
+}
 
 
 
 
 
 
+.underline {
+  border-bottom: 1px solid black;
+}
 
+.poster-height {
+  margin-top: 50px;
+}
 
+.lasttalk {
+  margin: px;
+  border-bottom: 1px solid blue;
+}
 
+.work-two {
+  border-bottom: 1px solid blue;
+}
 
+.work-two-height {
+  margin-top: 20px;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.fab-one {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f007";
+  font-size: 40px;
+  margin-right: 20px;
+}

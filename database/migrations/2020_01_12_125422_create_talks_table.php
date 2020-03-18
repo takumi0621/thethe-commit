@@ -15,10 +15,19 @@ class CreateTalksTable extends Migration
     {
         Schema::create('talks', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('user_id');
+            $table->integer('user_id')->unsigned()->index();
             $table->string('talk');
-            $table->string('job_id');
+            $table->integer('job_id')->unsigned()->index();
             $table->timestamps();
+            
+             
+            
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            
+            $table->foreign('job_id')->references('id')->on('jobs')->onDelete('cascade');
+            
+            
+           
         });
     }
 

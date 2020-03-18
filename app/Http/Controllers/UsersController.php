@@ -8,6 +8,18 @@ use App\User; // 追加
 
 class UsersController extends Controller
 {
+    
+     public function separating()
+    {
+       
+        
+        
+        
+         return view('users.show', $data);
+        
+        
+    }
+    
     public function index()
     {
         $users = User::orderBy('id', 'desc')->paginate(10);
@@ -31,7 +43,7 @@ public function show($id)
         $user = User::find($id);
         $jobs = $user->jobs()->orderBy('created_at', 'desc')->paginate(10);
         $talks = $user->talked()->orderBy('created_at', 'desc')->paginate(10);
-        $workers = $user->working()->orderBy('created_at', 'desc')->paginate(10);
+        //$workers = $user->working()->orderBy('created_at', 'desc')->paginate(10);
 
 
 
@@ -51,6 +63,11 @@ public function show($id)
 
         return view('users.show', $data);
     }
+    
+    
+    
+    
+    
     
     
     
@@ -90,36 +107,27 @@ public function show($id)
         return view('users.followers', $data);
     }
     
-    public function favoriting($id)
-    {
-        $user = User::find($id);
-        $microposts = $user->favoriting()->paginate(10);
-
+   
+    
+    
+    public function favoriting($userIds)
+    {    
+        $user = \Auth::user();
+        $countryData = $user->favoriting()->paginate(10);
+        
         $data = [
             'user' => $user,
-            'microposts' => $microposts,
+            'countryData' => $countryData,
         ];
 
         $data += $this->counts($user);
 
-        return view('users.favoriting', $data);
+        return view('users.favoriteList', $data);
     }
     
     
     
     
-    
-    
-    public function move()
-    {
-       
-        
-        
-        
-        
-        return view('users.posting');
-        
-    }
     
     
     

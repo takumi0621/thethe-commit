@@ -3,18 +3,33 @@
 @section('content')
 
 
-
+    @include('commons.navbar')
     <div class="post">
         <h1>チャンスを提供する</h1>
     
-        {!! Form::open(['route' => 'jobs.store']) !!}
-         　 <div class="form-group">
+        {!! Form::open(['route' => 'jobs.store', 'files' => true]) !!}
+         　 
+            <div class="form-group">
+                    {!! Form::label('district', '地域') !!}
+                    {{Form::select('district', [
+                       'america' => 'アメリカ',
+                       'asia' => 'アジア',
+                       'europe' => 'ヨーロッパ',
+                       'africa' => 'アフリカ',
+                       'oceania' => 'オセアニア'], old('name'), [
+                       'class' => 'form-control',
+                       'placeholder' => '選択してください',]
+                       
+                       
+                    )}}
+            </div>
+            <div class="form-group">
                     {!! Form::label('name', '名前') !!}
                     {!! Form::text('name', old('name'), ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
-                    {!! Form::label('district', '地域') !!}
-                    {!! Form::text('district', old('district'), ['class' => 'form-control']) !!}
+                    {!! Form::label('title', 'タイトル') !!}
+                    {!! Form::text('title', old('title'), ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
                     {!! Form::label('genre', 'ジャンル') !!}
@@ -33,7 +48,7 @@
                     {!! Form::text('requirement', old('requirement'), ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
-                    {!! Form::label('mail', 'メールアドレス') !!}
+                    {!! Form::label('mail', 'メール') !!}
                     {!! Form::text('mail', old('mail'), ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
@@ -42,8 +57,9 @@
             </div>
             <div class="form-group">
                     {!! Form::label('picture', '写真') !!}
-                    {!! Form::text('picture', old('picture'), ['class' => 'form-control']) !!}
+                    {!! Form::file('picture', ['class' => 'form-control']) !!}
             </div>
+            
             
             {!! Form::submit('Post', ['class' => 'btn btn-primary btn-block']) !!}
         {!! Form::close() !!}

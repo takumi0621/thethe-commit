@@ -16,6 +16,7 @@ class CreateJobsTable extends Migration
         Schema::create('jobs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
+            $table->string('name');
             $table->string('title');
             $table->string('district');
             $table->string('genre');
@@ -23,10 +24,10 @@ class CreateJobsTable extends Migration
             $table->string('content');
             $table->string('requirement');
             $table->string('mail');
-            $table->string('number');
+            $table->integer('number');
             $table->string('picture');
             $table->string('status');
-            $table->string('save_id');
+            $table->string('save_id')->nullable();
             
             $table->timestamps();
             
